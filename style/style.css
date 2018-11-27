@@ -1,3 +1,7 @@
+.root {
+    background-color: #222;
+}
+
 .search-bar {
     margin: 20px;
     text-align: center;
@@ -5,6 +9,8 @@
 
 .search-bar input {
     width: 75%;
+    color: white;
+    background-color: #333;
 }
 
 .video-detail .details {
@@ -12,6 +18,18 @@
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    color: #ddd;
+    background-color: #333;
+}
+
+.video-title {
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+.video-author {
+    font-style: italic;
+    font-size: 0.85em;
 }
 
 .video-item img {
@@ -20,8 +38,10 @@
 
 .list-group-item {
     cursor: pointer;
+    color: white;
+    /* background-color: #333; */ /* broken */
 }
 
 .list-group-item:hover {
-    background-color: #eee;
+    background-color: #006eff28;
 }
