@@ -1,0 +1,16 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "semi": "error",
+        "no-multiple-empty-lines": "error",
+        "newline-before-return": "error",
+        "no-trailing-spaces": "error"
+    }
+}
