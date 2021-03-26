@@ -13,8 +13,11 @@
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build"
     },
+    "resolutions": {
+        "axios": ">=0.21.1",
+        "is-svg": ">=4.2.2"
+    },
     "dependencies": {
-        "axios": "^0.21.1",
         "lodash": "^4.17.21",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
