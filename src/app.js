@@ -21,7 +21,7 @@ class App extends Component {
 
         this.videoSearch('sea otter');
 
-        console.log('last updated: March 25, 2021');
+        console.log('last updated: June 17, 2022');
     }
 
     videoSearch(term) {
