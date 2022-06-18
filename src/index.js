@@ -1,8 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import './style.css';
 import App from './components/app';
 
+const container = document.getElementById('root');
+const root = createRoot(container);
+
 // Take this component's generated HTML and put it on the page (in the DOM)
-ReactDOM.render(<App />, document.getElementById('root'));
+root.render(<App />);
