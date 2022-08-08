@@ -1,6 +1,14 @@
 import React from 'react';
 
-const VideoDetail = ({ video }) => {
+import { Video } from '../typings';
+
+type Props = {
+    video: Video | null;
+}
+
+export const VideoDetail = (props: Props) => {
+    const { video } = props;
+
     if (!video) {
         return <div>Loading...</div>;
     }
@@ -23,5 +31,3 @@ const VideoDetail = ({ video }) => {
         </div>
     );
 };
-
-export default VideoDetail;

@@ -1,17 +1,24 @@
+import React, { Component } from 'react';
+// @ts-expect-error IGNORe
+import YTSearch from 'youtube-api-search';
 import _ from 'lodash';
 
-import React, { Component } from 'react';
-import YTSearch from 'youtube-api-search';
-
-import SearchBar from './components/search_bar';
-import VideoList from './components/video_list';
-import VideoDetail from './components/video_detail';
+import { SearchBar } from './components/search_bar';
+import { VideoList } from './components/video_list';
+import { VideoDetail } from './components/video_detail';
+import { Video } from './typings';
 
 const API_KEY = process.env.REACT_APP_apiAccessKey;
 
+type Props = {};
+type State = {
+    videos: Video[];
+    selectedVideo: Video | null;
+};
+
 // Create a new component. This component will produce some HTML
-class App extends Component {
-    constructor(props) {
+class App extends Component<Props, State> {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
@@ -21,11 +28,11 @@ class App extends Component {
 
         this.videoSearch('sea otter');
 
-        console.log('last updated: June 17, 2022');
+        console.log('last updated: Aug 7, 2022');
     }
 
-    videoSearch(term) {
-        YTSearch({ key: API_KEY, term: term }, (videos) => {
+    videoSearch(term: string) {
+        YTSearch({ key: API_KEY, term: term }, (videos: Video[]) => {
             this.setState({
                 videos: videos,
                 selectedVideo: videos[0]
@@ -43,7 +50,7 @@ class App extends Component {
                 <SearchBar onSearchTermChange={videoSearch} />
                 <VideoDetail video={this.state.selectedVideo} />
                 <VideoList
-                    onVideoSelect={(selectedVideo) => this.setState({ selectedVideo })}
+                    onVideoSelect={(selectedVideo: Video) => this.setState({ selectedVideo })}
                     videos={this.state.videos} />
             </div>
         );
