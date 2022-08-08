@@ -24,8 +24,8 @@
         "youtube-api-search": "0.0.5"
     },
     "devDependencies": {
-        "@babel/eslint-parser": "^7.18.2",
-        "@babel/preset-react": "^7.17.12",
+        "@babel/eslint-parser": "^7.18.9",
+        "@babel/preset-react": "^7.18.6",
         "gh-pages": "^4.0.0"
     },
     "browserslist": {
