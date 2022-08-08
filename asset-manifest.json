@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/YouTubeApp/static/css/main.7164b917.css",
-    "main.js": "/YouTubeApp/static/js/main.0b301387.js",
+    "main.js": "/YouTubeApp/static/js/main.d5c9d588.js",
     "index.html": "/YouTubeApp/index.html",
     "main.7164b917.css.map": "/YouTubeApp/static/css/main.7164b917.css.map",
-    "main.0b301387.js.map": "/YouTubeApp/static/js/main.0b301387.js.map"
+    "main.d5c9d588.js.map": "/YouTubeApp/static/js/main.d5c9d588.js.map"
   },
   "entrypoints": [
     "static/css/main.7164b917.css",
-    "static/js/main.0b301387.js"
+    "static/js/main.d5c9d588.js"
   ]
 }
