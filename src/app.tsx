@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-// @ts-expect-error IGNORe
-import YTSearch from 'youtube-api-search';
 import _ from 'lodash';
+import { Component } from 'react';
+// @ts-expect-error IGNORE
+import YTSearch from 'youtube-api-search';
 
 import { SearchBar } from './components/search_bar';
-import { VideoList } from './components/video_list';
 import { VideoDetail } from './components/video_detail';
-import { Video } from './typings';
+import { VideoList } from './components/video_list';
+import type { Video } from './typings';
 
-const API_KEY = process.env.REACT_APP_apiAccessKey;
+const API_KEY = import.meta.env.VITE_apiAccessKey;
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 type Props = {};
 type State = {
     videos: Video[];
@@ -23,7 +24,7 @@ class App extends Component<Props, State> {
 
         this.state = {
             videos: [],
-            selectedVideo: null
+            selectedVideo: null,
         };
 
         this.videoSearch('sea otter');
@@ -35,7 +36,7 @@ class App extends Component<Props, State> {
         YTSearch({ key: API_KEY, term: term }, (videos: Video[]) => {
             this.setState({
                 videos: videos,
-                selectedVideo: videos[0]
+                selectedVideo: videos[0],
             });
         });
     }
@@ -50,8 +51,11 @@ class App extends Component<Props, State> {
                 <SearchBar onSearchTermChange={videoSearch} />
                 <VideoDetail video={this.state.selectedVideo} />
                 <VideoList
-                    onVideoSelect={(selectedVideo: Video) => this.setState({ selectedVideo })}
-                    videos={this.state.videos} />
+                    onVideoSelect={(selectedVideo: Video) =>
+                        this.setState({ selectedVideo })
+                    }
+                    videos={this.state.videos}
+                />
             </div>
         );
     }

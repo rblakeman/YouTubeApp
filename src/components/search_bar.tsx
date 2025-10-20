@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 type Props = {
     onSearchTermChange: (value: string) => void;
@@ -14,10 +14,11 @@ export function SearchBar(props: Props) {
     };
 
     return (
-        <div className="search-bar">
+        <div className='search-bar'>
             <input
                 value={term}
-                onChange={(event) => onInputChange(event.target.value)} />
+                onChange={(event) => onInputChange(event.target.value)}
+            />
         </div>
     );
-};
+}
