@@ -29,7 +29,7 @@ class App extends Component<Props, State> {
 
         this.videoSearch('sea otter');
 
-        console.log('last updated: Aug 7, 2022');
+        console.log('last updated: Oct 19, 2025');
     }
 
     videoSearch(term: string) {
