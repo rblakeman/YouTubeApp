@@ -1,0 +1,145 @@
+# Workflow name
+name: CICD
+
+# The on key is used to define when the CICD should be triggered, aka Event
+on:
+  # When someone push or merge a pull request inside the master branch
+  push:
+    branches:
+      - master
+  # When someone create a pull request from the master branch
+  pull_request:
+    branches:
+      - master
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  # Job name
+  checks:
+    name: Checks
+    # OS of the runner
+    runs-on: ubuntu-latest
+
+    # A step is an individual task that can run commands in a job and share the same runner.
+    # Each step can run a ready-to-use action or a bash command
+    steps:
+      - name: Checkout
+        # Ready-to-use action made by GH or third party companies
+        # We can recognize the GH actions from the third party ones checking the name prefix.
+        # `actions/` = GH
+        # `something-else/` = third party
+        # This is a GH ready-to-use action
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22 # lts/*
+          cache: 'npm'
+
+      - name: Health Check
+        run: echo npm && npm -v && echo node && node -v
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: ESLint
+        # Run the lint command that triggers the Lint & Prettier linter check
+        run: npm run lint:eslint
+
+      - name: Prettier
+        # Run the lint command that triggers the Lint & Prettier linter check
+        run: npm run lint:prettier
+
+      - name: Typechecker
+        # Run the typecheck command that triggers the tsc type check
+        run: npm run typecheck
+
+      # - name: Run Jest
+      #   # Run the test:unit command that runs Jest
+      #   run: npm run test:unit
+
+      # - name: Setup and run Cypress
+      #   # This is a cypress ready-to-use action that setups the runner installing the dependencies using NPM and installing Cypress
+      #   uses: cypress-io/github-action@v2
+      #   # The action accepts parameters.
+      #   # You should read the documentation before using an action to understand what it does under the hood.
+      #   with:
+      #     browser: chrome
+      #     headless: true
+      #     start: npm run :s
+
+      # - name: Push the coverage
+      #   # Run the coverage:push command that push the Jest coverage to codcov
+      #   # The secrets.CODECOV is a constant that is used to store the CODECOV token.
+      #   # The GH secrets are used like ENV variables to pass sensible information to the flow.
+      #   run: npm run coverage:push -- --token=${{ secrets.CODECOV_TOKEN }}
+
+      - name: Build Site
+        # Run the build command for Vite
+        run: npm run build
+
+  # Single deploy job since we're just deploying
+  deploy:
+    name: Deploy
+    needs: checks
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    # A step is an individual task that can run commands in a job and share the same runner.
+    # Each step can run a ready-to-use action or a bash command
+    steps:
+      - name: Checkout
+        # Ready-to-use action made by GH or third party companies
+        # We can recognize the GH actions from the third party ones checking the name prefix.
+        # `actions/` = GH
+        # `something-else/` = third party
+        # This is a GH ready-to-use action
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22 # lts/*
+          cache: 'npm'
+
+      - name: Health Check
+        run: echo npm && npm -v && echo node && node -v
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Site with ENV
+        # Run the build command for Vite with secrets
+        run: npm run build
+        env:
+          VITE_apiAccessKey: ${{ secrets.VITE_APIACCESSKEY }}
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          # Upload dist folder
+          path: './dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
