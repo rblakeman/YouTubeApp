@@ -1,5 +1,3 @@
-import React from 'react';
-
 import type { Video } from '../typings';
 
 type Props = {
@@ -14,17 +12,18 @@ const VideoListItem = (props: Props) => {
     return (
         <li
             onClick={() => onVideoSelect(video)}
-            className="list-group-item bg-inverse">
-            <div className="video-list media">
-                <div className="media-left">
+            className='list-group-item bg-inverse'>
+            <div className='video-list media'>
+                <div className='media-left'>
                     <img
-                        className="media-object"
+                        className='media-object'
                         src={imageUrl}
-                        alt="youtube thumbnail" />
+                        alt='youtube thumbnail'
+                    />
                 </div>
 
-                <div className="media-body">
-                    <div className="media-heading">{video.snippet.title}</div>
+                <div className='media-body'>
+                    <div className='media-heading'>{video.snippet.title}</div>
                 </div>
             </div>
         </li>

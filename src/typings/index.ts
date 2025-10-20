@@ -4,7 +4,7 @@ export type Video = {
         title: string;
         channelTitle: string;
         description: string;
-        thumbnails: { default: { url: string; } };
+        thumbnails: { default: { url: string } };
     };
     etag: string;
 };

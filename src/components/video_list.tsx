@@ -1,8 +1,6 @@
-import React from 'react';
-
 import VideoListItem from './video_list_item';
 
-import { Video } from '../typings';
+import type { Video } from '../typings';
 
 type Props = {
     videos: Video[];
@@ -15,9 +13,10 @@ export const VideoList = (props: Props) => {
             <VideoListItem
                 onVideoSelect={props.onVideoSelect}
                 key={video.etag}
-                video={video} />
+                video={video}
+            />
         );
     });
 
-    return <ul className="col-md-4 list-group">{videoItems}</ul>;
+    return <ul className='col-md-4 list-group'>{videoItems}</ul>;
 };
